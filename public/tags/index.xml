@@ -2,9 +2,9 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on kafka64</title>
-    <link>https://kafka54.github.io/tags/</link>
+    <link>https://kafka64.github.io/public/tags/</link>
     <description>Recent content in Tags on kafka64</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://kafka54.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language><atom:link href="https://kafka64.github.io/public/tags/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

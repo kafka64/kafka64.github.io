@@ -4,3 +4,6 @@
 [submodule "themes/hugo-paper"]
 	path = themes/hugo-paper
 	url = https://github.com/nanxiaobei/hugo-paper
+[submodule "public/course_dep"]
+	path = public/course_dep
+	url = https://github.com/kafka64/uwaterloo_course_dep

@@ -1,4 +1,4 @@
-baseURL = 'https://kafka54.github.io/'
+baseURL = 'https://kafka64.github.io/public'
 languageCode = 'en-us'
 title = 'kafka64'
 theme = 'hugo-paper'
