@@ -1,0 +1,4 @@
+baseURL = 'https://kafka54.github.io/'
+languageCode = 'en-us'
+title = 'kafka64'
+theme = 'hugo-paper'
