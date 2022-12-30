@@ -2,3 +2,22 @@ baseURL = 'https://kafka64.github.io/public'
 languageCode = 'en-us'
 title = 'kafka64'
 theme = 'hugo-paper'
+
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    name = "Home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    identifier = "about"
+    name = "About"
+    url = "/about/"
+    weight = 2
+  [[menu.main]]
+    identifier = "posts"
+    name = "Posts"
+    url = "/posts/"
+    weight = 6
+
+
