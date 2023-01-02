@@ -1,0 +1,362 @@
+LICENSE - (CC0) Creative Commons Zero:
+http://creativecommons.org/publicdomain/zero/1.0/
+
+To the extent possible under law, Tim Landers has waived all copyright and
+related or neighboring rights to the Hexabootable program.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+________________________________________________________________________
+
+ljmp   $0x7c0,$0x5
+mov    %cs,%ax
+mov    %ax,%ds
+mov    %ax,%es
+xor    %di,%di
+cld
+mov    $0x1000,%sp
+add    $0x120,%ax
+mov    %ax,%ss
+mov    $0x3,%ax
+int    $0x10
+xor    %dx,%dx
+mov    $0x2,%ah
+mov    $0x0,%bh
+int    $0x10
+push   %di
+push   %es
+mov    $0x19,%cx
+mov    $0xe,%ah
+jmp    0x35
+mov    $0xe0d,%ax
+int    $0x10
+mov    $0xa,%al
+int    $0x10
+mov    $0x20,%al
+int    $0x10
+pusha
+push   %ds
+mov    %es,%bx
+mov    %di,%dx
+mov    $0x2,%cx
+jmp    0x48
+mov    $0x3a,%al
+int    $0x10
+mov    %bh,%al
+call   0x1dc
+mov    %bl,%al
+call   0x1dc
+xchg   %dx,%bx
+loop   0x44
+call   0x1be
+mov    %bx,%ds
+mov    %dx,%si
+mov    $0x10,%cx
+jmp    0x66
+mov    $0x20,%al
+int    $0x10
+lods   %ds:(%si),%al
+call   0x1dc
+loop   0x62
+call   0x1be
+mov    %bx,%ds
+mov    %dx,%si
+mov    $0x10,%cx
+lods   %ds:(%si),%al
+cmp    $0x20,%al
+jae    0x7d
+mov    $0xfa,%al
+int    $0x10
+loop   0x76
+pop    %ds
+popa
+mov    $0x10,%ax
+call   0x1cb
+loop   0x2c
+pop    %es
+pop    %di
+mov    0x1fb,%dx
+push   %dx
+and    $0xf,%dl
+mov    0x1fd,%bl
+cmp    $0x0,%bl
+je     0xb0
+mov    $0x3,%al
+mul    %dl
+mov    $0xd,%dl
+cmp    $0xf,%bl
+je     0xac
+add    $0x1,%dl
+add    %al,%dl
+jmp    0xb5
+add    $0x3f,%dl
+mov    $0xf0,%cl
+pop    %ax
+shr    $0x4,%ax
+mov    %al,%dh
+pusha
+mov    $0x2,%ah
+mov    $0x0,%bh
+int    $0x10
+popa
+call   0xc9
+jmp    0x1b
+mov    $0x0,%ah
+int    $0x16
+cmp    $0x9,%al
+jne    0xd6
+mov    %cl,0x1fd
+ret
+cmp    $0x1b,%al
+jne    0xef
+mov    $0x0,%cl
+push   %di
+add    0x1fb,%di
+mov    %es:(%di),%dx
+cmp    $0x0,%cl
+ja     0x179
+pop    %di
+mov    %dx,%es
+ret
+mov    0x1fb,%dx
+cmp    $0x49,%ah
+je     0x1a9
+cmp    $0x51,%ah
+jne    0x106
+mov    $0x180,%ax
+call   0x1cb
+ret
+cmp    $0x47,%ah
+jne    0x10f
+mov    $0x0,%di
+ret
+cmp    $0x4f,%ah
+jne    0x118
+mov    $0xfe70,%di
+ret
+cmp    $0x8,%al
+je     0x11f
+cmp    $0x4b,%ah
+je     0x19d
+cmp    $0x4d,%ah
+je     0x189
+cmp    $0x48,%ah
+jne    0x13b
+cmp    $0xf,%dx
+jg     0x135
+mov    $0x10,%ax
+jmp    0x1ac
+subw   $0x10,0x1fb
+ret
+cmp    $0x50,%ah
+jne    0x153
+cmp    $0x180,%dx
+jl     0x14d
+mov    $0x10,%ax
+call   0x1cb
+ret
+addw   $0x10,0x1fb
+ret
+cmp    $0x42,%ah
+jne    0x15f
+add    0x1fb,%di
+push   %es
+push   %di
+lret
+cmp    $0x0,%cl
+jne    0xdc
+clc
+sub    $0x30,%al
+jae    0x16c
+ret
+cmp    $0x10,%al
+jl     0x174
+and    $0xf,%al
+add    $0x9,%al
+mov    $0x1,%cl
+jmp    0xdc
+cmp    $0xf,%bl
+ja     0x183
+jb     0x187
+shl    $0x4,%al
+and    %bl,%dl
+or     %dl,%al
+stos   %al,%es:(%di)
+pop    %di
+cmp    $0xf,%bl
+je     0x193
+addw   $0x1,0x1fb
+cmp    $0x0,%cl
+jl     0x19c
+notb   0x1fd
+ret
+cmp    $0xf0,%bl
+je     0x193
+subw   $0x1,0x1fb
+jmp    0x193
+mov    $0x180,%ax
+clc
+sub    %ax,%di
+jb     0x1b2
+ret
+mov    %es,%ax
+sub    $0x100,%ax
+mov    %ax,%es
+add    $0x1000,%di
+ret
+mov    $0x20,%al
+int    $0x10
+mov    $0xb3,%al
+int    $0x10
+mov    $0x20,%al
+int    $0x10
+ret
+clc
+add    %ax,%di
+jae    0x1db
+mov    %es,%ax
+add    $0x100,%ax
+mov    %ax,%es
+sub    $0x1000,%di
+ret
+pusha
+mov    %al,%bl
+mov    $0x2,%cx
+mov    $0xe,%ah
+shr    $0x4,%al
+jmp    0x1ed
+mov    %bl,%al
+and    $0xf,%al
+add    $0x30,%al
+cmp    $0x39,%al
+jle    0x1f5
+add    $0x7,%al
+int    $0x10
+loop   0x1e9
+popa
+ret
+.byte 0x00
+.byte 0x00
+.byte 0x0f
+.byte 0x55
+.byte 0xaa
+
+________________________________________________________________________
+
+USAGE
+
+  To compile this program save the above text as hexboot.s then:
+    gcc -c -o hexboot.o hexboot.s
+    ld -Ttext 0 --oformat binary -o hexboot.img hexboot.o
+
+  To run this program write the image to the MBR of a disk and boot it.
+  The boot image can be executed via x86 virtual machines as a RAW disk.
+
+  The following command can be used to write the boot image to a disk:
+    dd if=hexboot.img of=/dev/sda
+  Substitute /dev/sda with the desired hard/floppy/flash drive.
+
+  However, the above will destroy any existing partition tables. It may
+  be preferable to use another bootloader (like GRUB) to create a multi-
+  boot setup.  The Hexabootable image can then be copied to the first
+  sector of a partition instead of the master boot record of the drive
+  in order to preserve the partition tables.
+
+  See your boot loader manual for multi-boot configuration options.
+
+________________________________________________________________________
+
+WARNING
+
+  This software is ammunition for foot snipers.  You will be editing the
+  system's memory matrix directly, in real time, as it is running. It is
+  strongly suggested that you first use an artificial construct such as a
+  Virtual Machine to familiarize yourself with using Hexabootable.
+
+  If you edit a program as it is running a hung CPU is the most likely,
+  but not the worst thing that can happen by far;  Editing a working
+  stack is just as dangerous.  Your firmware and/or hardware could be
+  seriously damaged if you are not very careful in there...
+
+  The first page that appears (address 07C0:0000) contains the editor
+  program that is displaying the text.  You may be able to see memory
+  changing as you scroll near the end of the program.  Try not to tamper
+  with live machine code unless you're ready to face the consequences.
+
+  See the Memory Map for your system for regions to watch out for.
+
+________________________________________________________________________
+
+KEYBOARD CONTROLS
+
+  [0] [1] [2] [3]  These replace the nybble under the cursor with the
+  [4] [5] [6] [7]  corresponding hexadecimal digit.  Note: Other keys
+  [8] [9] [A] [B]  also produce values; Their behavior is undefined.
+  [C] [D] [E] [F]  Half a byte is written at a time. This could lead to
+                   incomplete instructions being executed if editing
+                   code while it is running.
+
+            [Tab]  Switch between Hex and Text edit modes. While in text
+                   keys other than those listed below store their ASCII
+                   codes at the current cursor location.
+
+  [Up]     [Down]  The arrow keys move the cursor.  Moving off the left
+  [Left]  [Right]  or right wraps around to the previous or next line.
+                   Moving beyond the top or bottom scrolls the display.
+
+     [Back Space]  Moves the cursor left.  Alias for [Left] arrow key.
+
+        [Page Up]  These change the displayed address by 384 bytes at a
+      [Page Down]  time.  Be careful not to exceed system memory bounds.
+
+           [Home]  Navigate to the beginning of the segment.  This sets
+                   the first byte displayed to offset zero.
+
+            [End]  Navigate to the end of the segment.  This sets the
+                   last byte displayed to offset 0xFFFFF.
+
+         [Escape]  Jump to the 16 bit segment address under the cursor.
+                   Eg: Pressing [Esc] while positioned on CO in: _C0_ 07
+                   will change the segment address to 07C0.  To Jump to
+                   any segment: Enter the desired address in unused
+                   memory (in LSB), then use the [Escape] key on it.
+
+                   It may be helpful to keep your available Exits listed
+                   in a common location for faster escapes.
+
+
+             [F8]  Execute code at the cursor; Use with extreme caution.
+                   To resume the hex editor execute the following jump:
+                     _EA_ 00  00  C0  07
+
+  Note:
+    When scrolling or paging across a segment boundary, Hexabootable
+    adjusts the segment:offset address to remain visibly consistent.
+    However, segment addresses will overflow near memory boundaries.
+
+________________________________________________________________________
+
+BASE 64 ENCODED BINARY
+
+  For your convenience I've provided the compiled image in Base64:
+
+6gUAwAeMyI7YjsAx//y8ABAFIAGO0LgDAM0QMdK0ArcAzRBXBrkZALQO6wm4DQ7NELAKzRCwIM0Q
+YB6Mw4n6uQIA6wSwOs0QiPjojwGI2OiKAYfT4u7oZQGO24nWuRAA6wSwIM0QrOhyAeL26E8BjtuJ
+1rkQAKw8IHMCsPrNEOL1H2G4EADoQgHioQdfixb7AVKA4g+KHv0BgPsAdBKwA/bisg2A+w90A4DC
+AQDC6wWAwj+x8FjB6ASIxmC0ArcAzRBh6AMA6VL/tADNFjwJdQWIDv0BwzwbdRWxAFcDPvsBJosV
+gPkAD4eOAF+OwsOLFvsBgPxJD4SvAID8UXUHuIAB6MYAw4D8R3UEvwAAw4D8T3UEv3D+wzwIdAOA
+/Et0fID8TXRjgPxIdRCD+g9/BbgQAOt3gy77ARDDgPxQdROB+oABfAe4EADofwDDgwb7ARDDgPxC
+dQcDPvsBBlfLgPkAD4V2//gsMHMBwzwQfAQkDwQJsQHpY/+A+w93BXIHwOAEINoI0KpfgPsPdAWD
+BvsBAYD5AHwE9hb9AcOA+/B08YMu+wEB6+q4gAH4KcdyAcOMwC0AAY7AgccAEMOwIM0QsLPNELAg
+zRDD+AHHcwuMwAUAAY7Age8AEMNgiMO5AgC0DsDoBOsEiNgkDwQwPDl+AgQHzRDi8GHDAAAPVao=
+
+  Save the above b64 blob as hexboot.b64 then:
+    base64 -d hexboot.b64 > hexboot.img
+
+  Happy Hacking!
